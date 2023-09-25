@@ -173,10 +173,12 @@ Sidebar
 .sidebar__links {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 .sidebar__link {
+  position: relative;
   display: inline-block;
-  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
   font-size: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -264,6 +266,17 @@ Sidebar
   border-radius: 3px;
   overflow: hidden;
   height: 150px;
+  transition: var(--transition);
+}
+.creations__card:hover::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  transition: var(--transition);
 }
 .creation__img {
   height: 100%;
@@ -275,6 +288,9 @@ Sidebar
   color: var(--white);
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+.creations__card:hover .creation__text {
+  color: var(--very-dark-gray);
 }
 .btn-container {
   margin-top: 1rem;
@@ -297,10 +313,12 @@ Sidebar
 .footer__links {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .footer__link {
   display: inline-block;
-  padding-bottom: 0.5rem;
+  position: relative;
+  margin-bottom: 0.5rem;
   text-transform: capitalize;
   letter-spacing: 2px;
 }
@@ -311,11 +329,33 @@ Sidebar
   gap: 0.5rem;
 }
 .social__link {
+  position: relative;
   font-size: 1.5rem;
 }
 .footer__fine-print {
   margin: 0;
   letter-spacing: 2px;
+}
+/* 
+Links Active State
+------------------ */
+
+.nav__link:hover::before,
+.sidebar__link:hover::before,
+.footer__link:hover::before,
+.social__link:hover::before {
+  position: absolute;
+  content: "";
+  bottom: -0.25rem;
+  width: 90%;
+  height: 2px;
+  background-color: var(--white);
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: center;
+}
+.social__link:hover::before {
+  bottom: 0.25rem;
 }
 @media (min-width: 574px) {
   .creations__grid {
@@ -339,9 +379,11 @@ Sidebar
     gap: 2rem;
   }
   .nav__link {
+    position: relative;
     letter-spacing: 1px;
     text-transform: capitalize;
     font-size: 15px;
+    transition: 0.6s;
   }
   .sidebar {
     display: none;
